@@ -1,4 +1,5 @@
 import solver
+import Rect
 
 def readFile(fileName):
     file = open(fileName, 'r')
@@ -27,13 +28,10 @@ def verifyOverlap(solution):
         while secondaryIndex < len(solution):
             rect1 = solution[index]
             rect2 = solution[secondaryIndex]
-            if rectsOverlap(rect1, rect2):
+            if rect1.overlap(rect2):
                 return False
 
     return True
-
-def rectsOverlap(rect1, rect2):
-    return (rect1.x1 > rect2.x2 | rect2.x1 > rect1.x2) & (rect1.y1 > rect2.y2 | rect2.y1 > rect1.y2)
 
 def verifyRectangle(rect, pizza, minimum, maximum):
     print('give me a moment')
