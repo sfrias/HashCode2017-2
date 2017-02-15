@@ -8,4 +8,7 @@ class Rect:
         self.bottom = bottom
 
     def overlap(self, rect):
-        return (self.left < rect.right and rect.right < self.left and self.top < rect.bottom and self.bottom < rect.top)
+        return (self.left < rect.right and rect.right > self.left and self.top < rect.bottom and self.bottom > rect.top)
+
+    def size(self):
+        return (self.top - self.bottom) * (self.right - self.left)
