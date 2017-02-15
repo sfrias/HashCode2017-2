@@ -6,7 +6,7 @@ def readFile(fileName):
     file = open(fileName, 'r')
     firstLine = file.readline().replace('\n','')
     splitFirstLine = [int(param) for param in firstLine.split(' ')]
-    pizza = Pizza(file.read().split('\n'))
+    pizza = Pizza([line for line in file.read().split('\n') if len(line) > 0])
     solution = solver.solve(splitFirstLine[0], splitFirstLine[1], splitFirstLine[2], splitFirstLine[3], pizza)
     if (verify(pizza, solution, splitFirstLine[2], splitFirstLine[3])):
         print(evaluateSolution(pizza, solution))
@@ -45,6 +45,8 @@ def verifyRectangle(rect, pizza, minimum, maximum):
     return slice.tomatoes >= minimum and slice.mushrooms >= minimum
 
 def evaluateSolution(pizza, solution):
-    print('it\'s ok!')
+    solutionSize = float(sum([rect.size() for rect in solution]))
+    pizzaSize = float(pizza.rect().size())
+    return (solutionSize / pizzaSize) * 100
 
 readFile('pizzas/small.in')
