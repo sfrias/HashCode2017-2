@@ -11,4 +11,4 @@ class Rect:
         return (self.left < rect.right and rect.right > self.left and self.top < rect.bottom and self.bottom > rect.top)
 
     def size(self):
-        return (self.top - self.bottom) * (self.right - self.left)
+        return (self.bottom - self.top) * (self.right - self.left)

@@ -1,11 +1,11 @@
 import solver
-import Rect
-import Pizza
+from Rect import *
+from Pizza import *
 
 def readFile(fileName):
     file = open(fileName, 'r')
     firstLine = file.readline().replace('\n','')
-    splitFirstLine = firstLine.split(' ')
+    splitFirstLine = [int(param) for param in firstLine.split(' ')]
     pizza = Pizza(file.read().split('\n'))
     solution = solver.solve(splitFirstLine[0], splitFirstLine[1], splitFirstLine[2], splitFirstLine[3], pizza)
     if (verify(pizza, solution, splitFirstLine[2], splitFirstLine[3])):
@@ -36,13 +36,13 @@ def verifyOverlap(solution):
     return True
 
 def verifyRectangle(rect, pizza, minimum, maximum):
-    if rect.size() > maximum:
+    size = rect.size()
+    if size > maximum or size < (minimum *2):
         return False
-    if rect.size() < (minimum * 2):
-        return False
+
     slice = pizza.sliceArray(rect)
 
-    return slice.tomatoes > minimum and slice.mushrooms > minimum
+    return slice.tomatoes >= minimum and slice.mushrooms >= minimum
 
 def evaluateSolution(pizza, solution):
     print('it\'s ok!')
